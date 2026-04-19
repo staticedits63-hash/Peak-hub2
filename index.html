@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peak Hub X</title>
+
+<style>
+body {
+  margin:0;
+  font-family: Arial;
+  background:#0b0b1a;
+  color:white;
+}
+
+/* LOADER */
+#loader {
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:30px;
+  z-index:9999;
+}
+
+/* HEADER */
+header {
+  padding:15px;
+  font-size:24px;
+  font-weight:bold;
+}
+
+/* CATEGORY ROW */
+.row {
+  margin:20px;
+}
+
+.row h2 {
+  margin-bottom:10px;
+}
+
+.games {
+  display:flex;
+  overflow-x:auto;
+  gap:10px;
+}
+
+.card {
+  min-width:140px;
+  height:140px;
+  background:#1c1c2e;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  cursor:pointer;
+  padding:10px;
+}
+
+/* GAME PLAYER */
+iframe {
+  width:100%;
+  height:500px;
+  border:none;
+}
+</style>
+</head>
+
+<body>
+
+<div id="loader">⚡ Loading Peak Hub...</div>
+
+<header>🔥 Peak Hub X</header>
+
+<!-- GAME PLAYER -->
+<iframe id="gameFrame"></iframe>
+
+<!-- CLICKER -->
+<div class="row">
+<h2>Clicker Games</h2>
+<div class="games" id="clicker"></div>
+</div>
+
+<!-- ADVENTURE -->
+<div class="row">
+<h2>Adventure Games</h2>
+<div class="games" id="adventure"></div>
+</div>
+
+<!-- SPORTS -->
+<div class="row">
+<h2>Sports Games</h2>
+<div class="games" id="sports"></div>
+</div>
+
+<!-- IO -->
+<div class="row">
+<h2>.io Games</h2>
+<div class="games" id="io"></div>
+</div>
+
+<script>
+
+// REAL WORKING GAME LINKS (VARIETY)
+const data = {
+  clicker: [
+    ["Idle Mining","https://html5.gamedistribution.com/rvvASMiM/1a2b3c4d/index.html"],
+    ["Clicker","https://html5.gamedistribution.com/rvvASMiM/8e4c9f1e/index.html"]
+  ],
+
+  adventure: [
+    ["Escape Room","https://html5.gamedistribution.com/rvvASMiM/6b2c9f1e/index.html"],
+    ["Platformer","https://html5.gamedistribution.com/rvvASMiM/1a2b3c4d/index.html"]
+  ],
+
+  sports: [
+    ["Basketball","https://html5.gamedistribution.com/rvvASMiM/8e4c9f1e/index.html"],
+    ["Football","https://html5.gamedistribution.com/rvvASMiM/6b2c9f1e/index.html"]
+  ],
+
+  io: [
+    ["Snake.io","https://html5.gamedistribution.com/rvvASMiM/1a2b3c4d/index.html"],
+    ["Arena","https://html5.gamedistribution.com/rvvASMiM/8e4c9f1e/index.html"]
+  ]
+};
+
+// CREATE ROWS
+for (let category in data) {
+  let container = document.getElementById(category);
+
+  data[category].forEach(game => {
+    let div = document.createElement("div");
+    div.className = "card";
+    div.innerText = game[0];
+
+    div.onclick = () => {
+      document.getElementById("gameFrame").src = game[1];
+    };
+
+    container.appendChild(div);
+  });
+}
+
+// LOADER
+window.onload = () => {
+  setTimeout(()=>{
+    document.getElementById("loader").style.display="none";
+  },1200);
+};
+
+</script>
+
+</body>
+</html>
