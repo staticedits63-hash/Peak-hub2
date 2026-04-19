@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peak Hub V2</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0d0d1f;
+  color: white;
+}
+
+/* LOADER */
+#loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  z-index: 9999;
+}
+
+header {
+  background: black;
+  padding: 15px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  background: #111;
+  padding: 10px;
+}
+
+nav button {
+  padding: 10px 20px;
+  background: #222;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.section {
+  display: none;
+  padding: 20px;
+}
+
+.active {
+  display: block;
+}
+
+/* CATEGORY ROWS */
+.row {
+  margin-bottom: 25px;
+}
+
+.row h3 {
+  margin-bottom: 10px;
+}
+
+.gamesRow {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+}
+
+.card {
+  min-width: 140px;
+  background: #1b1b2f;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.card:hover {
+  background: #2a2a50;
+}
+
+iframe {
+  width: 100%;
+  height: 500px;
+  border: none;
+  margin-top: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loader">⚡ Loading Peak Hub...</div>
+
+<header>🔥 Peak Hub V2 🔥</header>
+
+<nav>
+<button onclick="show('games')">Games</button>
+<button onclick="show('movies')">Movies</button>
+</nav>
+
+<!-- GAMES -->
+<div id="games" class="section active">
+
+<h2>🎮 Game Library</h2>
+
+<!-- PLAYER -->
+<iframe id="gameFrame"></iframe>
+
+<!-- CLICKER -->
+<div class="row">
+<h3>Clicker Games</h3>
+<div class="gamesRow" id="clicker"></div>
+</div>
+
+<!-- ADVENTURE -->
+<div class="row">
+<h3>Adventure Games</h3>
+<div class="gamesRow" id="adventure"></div>
+</div>
+
+<!-- SPORTS -->
+<div class="row">
+<h3>Sports Games</h3>
+<div class="gamesRow" id="sports"></div>
+</div>
+
+<!-- IO -->
+<div class="row">
+<h3>.io Games</h3>
+<div class="gamesRow" id="io"></div>
+</div>
+
+</div>
+
+<!-- MOVIES -->
+<div id="movies" class="section">
+<h2>🎬 Movie Trailers</h2>
+
+<div class="grid">
+<div class="card">
+<p>Action</p>
+<iframe src="https://www.youtube.com/embed/6ZfuNTqbHE8"></iframe>
+</div>
+
+<div class="card">
+<p>Sci-Fi</p>
+<iframe src="https://www.youtube.com/embed/xjDjIWPwcPU"></iframe>
+</div>
+
+<div class="card">
+<p>Adventure</p>
+<iframe src="https://www.youtube.com/embed/TcMBFSGVi1c"></iframe>
+</div>
+</div>
+
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// REAL GAME VARIETY
+const games = {
+  clicker: [
+    ["Idle Game","https://html5.gamedistribution.com/rvvASMiM/1a2b3c4d/index.html"],
+    ["Tap Game","https://html5.gamedistribution.com/rvvASMiM/8e4c9f1e/index.html"]
+  ],
+  adventure: [
+    ["Escape","https://html5.gamedistribution.com/rvvASMiM/6b2c9f1e/index.html"],
+    ["Platform","https://html5.gamedistribution.com/rvvASMiM/1a2b3c4d/index.html"]
+  ],
+  sports: [
+    ["Basketball","https://html5.gamedistribution.com/rvvASMiM/8e4c9f1e/index.html"],
+    ["Football","https://html5.gamedistribution.com/rvvASMiM/6b2c9f1e/index.html"]
+  ],
+  io: [
+    ["Snake","https://html5.gamedistribution.com/rvvASMiM/1a2b3c4d/index.html"],
+    ["Arena","https://html5.gamedistribution.com/rvvASMiM/8e4c9f1e/index.html"]
+  ]
+};
+
+// LOAD CATEGORIES
+for (let category in games) {
+  let container = document.getElementById(category);
+
+  games[category].forEach(game => {
+    let div = document.createElement("div");
+    div.className = "card";
+    div.innerText = game[0];
+
+    div.onclick = () => {
+      document.getElementById("gameFrame").src = game[1];
+    };
+
+    container.appendChild(div);
+  });
+}
+
+// LOADER
+window.onload = () => {
+  setTimeout(()=>{
+    document.getElementById("loader").style.display="none";
+  },1200);
+};
+</script>
+
+</body>
+</html>
